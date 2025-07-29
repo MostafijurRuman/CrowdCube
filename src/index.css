@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@theme {
+  --font-poppins: "Poppins", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --color-primary: #3b5afb;
+  --color-banner-gradient-left: #9854f6;
+  --color-banner-gradient-right: #3b5afb;
+  --color-accent-green: #3ed598;
+  --color-accent-purple: #b874f2;
+  --color-accent-red: #ff647c;
+  --color-accent-yellow: #ffd36a;
+  --color-background: #f7f8fa;
+  --color-card-bg: #ffffff;
+  --color-section-bg: #f4f6fa;
+  --color-divider: #e5e7eb;
+  --color-text-primary: #222222;
+  --color-text-secondary: #5f6d7e;
+  --color-button-blue: #3b5afb;
+  --color-button-text: #ffffff;
+  --color-disabled: #f0f1f3;
+}
