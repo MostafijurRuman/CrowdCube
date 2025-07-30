@@ -6,9 +6,9 @@ import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 
 const navLinks = [
     { name: "Home", to: "/" },
-    { name: "All Campaign", to: "/all-campaign" },
+    { name: "All Campaign", to: "/all-campaigns" },
     { name: "Add New Campaign", to: "/add-campaign" },
-    { name: "My Campaign", to: "/my-campaign" },
+    { name: "My Campaign", to: "/my-campaigns" },
     { name: "My Donations", to: "/my-donations" },
 ];
 

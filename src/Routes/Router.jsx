@@ -21,7 +21,7 @@ const router = createBrowserRouter([
                 element: <Home></Home> ,
             },
             {
-                path: "/all-campaign",
+                path: "/all-campaigns",
                 element: <AllCampaign></AllCampaign> ,
             },
             {
