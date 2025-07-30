@@ -5,6 +5,11 @@ import {
 import Home from "../Pages/Home";
 import AllCampaign from "../Pages/AllCampaign";
 import MainLayout from "../Layouts/MainLayout";
+import AddCampaign from "../Pages/AddCampaign";
+import MyCampaign from "../Pages/MyCampaign";
+import MyDonations from "../Pages/MyDonations";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
 
 const router = createBrowserRouter([
     {
@@ -20,8 +25,24 @@ const router = createBrowserRouter([
                 element: <AllCampaign></AllCampaign> ,
             },
             {
-                path: "contact",
-                element: <div>Contact</div>,
+                path: "/add-campaign",
+                element: <AddCampaign></AddCampaign>,
+            },
+            {
+                path: "/my-campaign",
+                element: <MyCampaign></MyCampaign>,
+            },
+            {
+                path: "/my-donations",
+                element: <MyDonations></MyDonations>,
+            },
+            {
+                path: "/login",
+                element: <Login></Login>,
+            },
+            {
+                path: "/register",
+                element: <Register></Register>,
             },
         ],
     },
