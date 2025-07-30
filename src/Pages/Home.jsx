@@ -2,7 +2,8 @@ import { FaLightbulb, FaUsers, FaSeedling, FaHandHoldingUsd, FaRocket } from "re
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import CountUp from "react-countup";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
+import CampaignCard from "../Components/CampaignCard";
 
 // Example slide data
 const slides = [
@@ -39,6 +40,7 @@ const slides = [
 ];
 
 const Home = () => {
+ const campaigns = useLoaderData();
   return (
     <>
       {/* Hero Slider */}
@@ -134,33 +136,37 @@ const Home = () => {
             Discover and support ongoing campaigns from passionate creators. Explore projects making a difference and help bring their visions to life.
           </p>
           {/* Cards will go here */}
-          <div className="flex flex-wrap justify-center gap-6 min-h-[190px]">
-            {/* TODO: Map campaign cards here */}
-            <div className="w-40 h-32 flex items-center justify-center bg-card-bg rounded-xl text-xl font-semibold text-primary border border-divider">
-              Card here
-            </div>
-          </div>
-          <div className="flex justify-center mt-10">
-            <NavLink
-              to="/all-campaigns"
-              className="inline-block px-8 py-3 rounded-full font-bold bg-accent-purple text-white shadow-xl hover:bg-primary transition-colors duration-200 font-poppins text-lg tracking-wide"
-            >
-              View All Campaigns
-            </NavLink>
-          </div>
-        </div>
-      </section>
-
-      {/* How Crowdfunding Works */}
-      <section className="py-20 bg-section-bg">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center text-primary font-poppins mb-5 tracking-tight">
-          Why Crowdfunding Works
-        </h2>
-        <p className="text-lg md:text-xl font-inter text-text-secondary text-center mb-14 max-w-2xl mx-auto">
-          The power of many can achieve what individuals alone cannot. Discover how Crowdcube makes collective impact possible.
-        </p>
-        <div className="flex flex-col md:flex-row justify-center items-stretch gap-8 max-w-6xl mx-auto">
-          {/* Card 1 */}
+          <div className="grid grid-cols-3 gap-10">
+            {/* Map campaign cards here */}
+                  {campaigns.length > 0 ? (
+                    campaigns.slice(0, 6).map((campaign) => (
+                    <CampaignCard key={campaign.id} campaign={campaign} />
+                    ))
+                  ) : (
+                    <div className="w-full text-center text-lg text-text-secondary">
+                    No active campaigns found.
+                    </div>
+                  )}
+                  </div>
+                  <div className="flex justify-center mt-10">
+                  <NavLink
+                    to="/all-campaigns"
+                    className="inline-block px-8 py-3 rounded-full font-bold bg-accent-purple text-white shadow-xl hover:bg-primary transition-colors duration-200 font-poppins text-lg tracking-wide"
+                  >
+                    View All Campaigns
+                  </NavLink>
+                  </div>
+                </div>
+                </section>
+                <section className="py-20 bg-section-bg">
+                <h2 className="text-4xl md:text-5xl font-extrabold text-center text-primary font-poppins mb-5 tracking-tight">
+                  Why Crowdfunding Works
+                </h2>
+                <p className="text-lg md:text-xl font-inter text-text-secondary text-center mb-14 max-w-2xl mx-auto">
+                  The power of many can achieve what individuals alone cannot. Discover how Crowdcube makes collective impact possible.
+                </p>
+                <div className="flex flex-col md:flex-row justify-center items-stretch gap-8 max-w-6xl mx-auto">
+                  {/* Card 1 */}
           <div className="flex-1 flex flex-col items-center text-center px-3 py-8 bg-card-bg rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
             <span className="bg-accent-yellow/20 rounded-full p-5 mb-4">
               <FaUsers className="text-4xl text-accent-yellow" />

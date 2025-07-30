@@ -19,10 +19,12 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home> ,
+                loader: ()=>fetch('http://localhost:5000/campaigns'),
             },
             {
                 path: "/all-campaigns",
                 element: <AllCampaign></AllCampaign> ,
+                loader: ()=>fetch('http://localhost:5000/campaigns'),
             },
             {
                 path: "/add-campaign",

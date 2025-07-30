@@ -18,6 +18,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.7.1",
     "react-toastify": "^11.0.5",
+    "sweetalert2": "^11.22.2",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
