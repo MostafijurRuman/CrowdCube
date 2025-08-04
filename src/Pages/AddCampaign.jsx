@@ -4,8 +4,8 @@ import Swal from 'sweetalert2'
 
 // Dummy user data (replace with your actual auth context/hook)
 const user = {
-  email: "mostafijurruman7@gmail.com",
-  displayName: "Mostafijur Ruman",
+  email: "ripa@Ruman.com",
+  displayName: "Ripali",
 };
 
 const campaignTypes = [

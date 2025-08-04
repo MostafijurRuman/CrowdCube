@@ -1,8 +1,9 @@
-import React, {  useState } from "react";
+import {  useContext, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { FaCube, FaUserCircle } from "react-icons/fa";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
-// import { AuthContext } from "../../Provider/AuthProvider"; // Adjust path as needed
+import { AuthContext } from "../Contexts/AuthContext";
+
 
 const navLinks = [
     { name: "Home", to: "/" },
@@ -13,10 +14,8 @@ const navLinks = [
 ];
 
 const Header = () => {
-    // const { user, logout, loading } = useContext(AuthContext);
-    const user = false;
-    const loading = false;
-    const logout = false;
+    const { user, logout, loading } = useContext(AuthContext);
+    
     const [menuOpen, setMenuOpen] = useState(false);
 
     const activeLink =
@@ -78,7 +77,7 @@ const Header = () => {
                                         <span className="font-semibold">{user.displayName || user.name || "Profile"}</span>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard">Dashboard</Link>
+                                        <Link to="/my-campaigns">My Campaigns</Link>
                                     </li>
                                     <li>
                                         <button onClick={logout} className="text-error">Logout</button>

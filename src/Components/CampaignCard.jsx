@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaCalendarAlt, FaDollarSign } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 
 // Helper function to calculate days left
 const calculateDaysLeft = (deadline) => {
@@ -90,9 +91,9 @@ export default function CampaignCard({ campaign }) {
         </div>
 
         {/* See More Button */}
-        <button className="w-full bg-primary hover:bg-accent-purple text-button-text font-bold py-3 px-4 rounded-xl transition-all duration-300 font-poppins shadow-md hover:shadow-lg mt-auto">
+        <NavLink to={`campaigns/${campaign._id}`} className="w-full bg-primary hover:bg-accent-purple text-button-text font-bold py-3 px-4 rounded-xl transition-all duration-300 font-poppins shadow-md hover:shadow-lg mt-auto">
           See More
-        </button>
+        </NavLink>
       </div>
     </div>
   );

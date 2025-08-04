@@ -83,8 +83,8 @@ export default function AllCampaigns({ campaigns }) {
           </div>
         </div>
 
-        {/* Table */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+        {/* Table - Desktop View */}
+        <div className="hidden md:block bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
           {/* Table Header */}
           <div className="grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50 border-b border-gray-200 font-semibold text-gray-600 uppercase text-sm tracking-wide font-poppins">
             <div className="col-span-5">Campaign</div>
@@ -153,6 +153,74 @@ export default function AllCampaigns({ campaigns }) {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Mobile View - Card Layout */}
+        <div className="md:hidden space-y-4">
+          {sortedCampaigns.map((campaign) => (
+            <div 
+              key={campaign._id} 
+              className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden"
+            >
+              {/* Campaign Image and Basic Info */}
+              <div className="p-4">
+                <div className="flex items-start gap-3 mb-3">
+                  <img
+                    src={campaign.image}
+                    alt={campaign.title}
+                    className="w-16 h-16 rounded-lg object-cover border border-gray-200 flex-shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-gray-900 font-poppins text-lg leading-tight mb-1">
+                      {campaign.title}
+                    </h3>
+                    <p className="text-gray-500 font-inter text-sm line-clamp-2">
+                      {campaign.description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Campaign Details */}
+                <div className="space-y-3">
+                  {/* Type */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-600 font-inter text-sm">Type:</span>
+                    <span 
+                      className={`px-3 py-1 rounded-full text-sm font-medium border ${getCategoryColor(campaign.type)}`}
+                    >
+                      {campaign.type}
+                    </span>
+                  </div>
+
+                  {/* Min Donation */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-600 font-inter text-sm">Min Donation:</span>
+                    <span className="font-bold text-gray-900 font-poppins text-lg">
+                      ${campaign.minDonation}
+                    </span>
+                  </div>
+
+                  {/* Deadline */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-600 font-inter text-sm">Deadline:</span>
+                    <span className="text-gray-500 font-inter">
+                      {formatDate(campaign.deadline)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Action Button */}
+                <div className="mt-4 pt-3 border-t border-gray-100">
+                  <button
+                    onClick={() => handleSeeMore(campaign._id)}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold font-poppins py-3 px-4 rounded-lg transition-all duration-200"
+                  >
+                    See More Details
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Empty State (if no campaigns) */}

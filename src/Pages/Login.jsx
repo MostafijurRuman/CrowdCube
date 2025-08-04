@@ -2,7 +2,8 @@ import React, {useContext, useState } from "react";
 import {  NavLink, useLocation, useNavigate } from "react-router-dom";
 import { MdEmail, MdLock } from "react-icons/md";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-// import { AuthContext } from "../Provider/AuthProvider";
+import { AuthContext } from "../Contexts/AuthContext";
+
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -11,24 +12,24 @@ export default function Login() {
     const [error, setError] = useState(""); // Add error state
     const navigate = useNavigate();
     const location =useLocation();
-    // const { loginWithEmailPassword,handelLoginWithGoogle } = useContext(AuthContext);
+    const { loginWithEmailPassword,handelLoginWithGoogle } = useContext(AuthContext);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setError(""); // Clear previous error
-    //     try {
-    //         await loginWithEmailPassword(email, password);
-    //         navigate(location?.state ? location.state : "/" );
-    //     } catch (err) {
-    //         // Remove "Firebase:" prefix from error message if present
-    //         const cleanedMessage = err.message?.replace(/^Firebase:\s*/, "") || "Login failed. Please try again.";
-    //         setError(cleanedMessage);
-    //     }
-    // };
+        try {
+            await loginWithEmailPassword(email, password);
+            navigate(location?.state ? location.state : "/" );
+        } catch (err) {
+            // Remove "Firebase:" prefix from error message if present
+            const cleanedMessage = err.message?.replace(/^Firebase:\s*/, "") || "Login failed. Please try again.";
+            setError(cleanedMessage);
+        }
+    };
 
-    // const handleGoogleLogin = () => {
-    //     handelLoginWithGoogle();
-    //      navigate(location?.state ? location.state : "/" );
+    const handleGoogleLogin = () => {
+        handelLoginWithGoogle();
+         navigate(location?.state ? location.state : "/" );
     };
 
     return (
@@ -44,7 +45,7 @@ export default function Login() {
                     <h1 className="text-3xl font-bold text-center mb-8">Login</h1>
                     <button
                         type="button"
-                        // onClick={handleGoogleLogin}
+                        onClick={handleGoogleLogin}
                         className="w-full flex items-center justify-center gap-2 h-11 rounded-full bg-white text-gray-800 font-semibold shadow hover:bg-gray-100 transition mb-6"
                     >
                         <img

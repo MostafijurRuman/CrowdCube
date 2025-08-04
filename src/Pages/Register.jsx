@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { FaUser, FaEnvelope, FaImage, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import { AuthContext } from "../Provider/AuthProvider";
+import { AuthContext } from "../Contexts/AuthContext";
 
 export default function Register() {
     const [showPassword, setShowPassword] = useState(false);
@@ -15,7 +15,7 @@ export default function Register() {
     });
     const [passwordError, setPasswordError] = useState("");
     const navigate = useNavigate();
-    // const{registerWithEmailPassword,updateUserProfile,setUser}=useContext(AuthContext)
+    const{registerWithEmailPassword,updateUserProfile,setUser}=useContext(AuthContext)
 
     const { name, email, photo, password } = form;
 
@@ -59,12 +59,14 @@ export default function Register() {
                         navigate("/");
                     })
                     .catch(err => {
-                        toast.error(err.message || "Profile update failed.");
+                        const cleanError = err.message.replace(/^Firebase:\s*/i, '');
+                        toast.error(cleanError || "Profile update failed.");
                         console.log(err);
                     });
             })
             .catch((err) => {
-                toast.error(err.message || "Registration failed.");
+                const cleanError = err.message.replace(/^Firebase:\s*/i, '');
+                toast.error(cleanError || "Registration failed.");
                 console.log(err);
             });
     };
@@ -74,7 +76,7 @@ export default function Register() {
             className="flex justify-center items-center min-h-screen bg-cover bg-center"
             style={{
                 backgroundImage:
-                    "url(https://images.pexels.com/photos/9034658/pexels-photo-9034658.jpeg)",
+                    "url(https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg)",
             }}
         >
             <ToastContainer />
