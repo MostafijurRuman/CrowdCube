@@ -1,12 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import Swal from 'sweetalert2'
-
-// Dummy user data (replace with your actual auth context/hook)
-const user = {
-  email: "ripa@Ruman.com",
-  displayName: "Ripali",
-};
+import { AuthContext } from "../Contexts/AuthContext";
 
 const campaignTypes = [
   "Personal Issue",
@@ -16,6 +11,7 @@ const campaignTypes = [
 ];
 
 const AddCampaign = () => {
+  const {user} = useContext(AuthContext)
   const [form, setForm] = useState({
     image: "",
     title: "",
@@ -26,6 +22,7 @@ const AddCampaign = () => {
     goalAmount: "", 
     creatorEmail: user.email,
     creatorName: user.displayName,
+    creatorPhoto: user.photoURL,
   });
   const [loading, setLoading] = useState(false);
 

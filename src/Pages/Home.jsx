@@ -136,7 +136,7 @@ const Home = () => {
             Discover and support ongoing campaigns from passionate creators. Explore projects making a difference and help bring their visions to life.
           </p>
           {/* Cards will go here */}
-          <div className="grid grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3  gap-10">
             {/* Map campaign cards here */}
                   {campaigns.length > 0 ? (
                     campaigns.slice(0, 6).map((campaign) => (

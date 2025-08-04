@@ -1,19 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Contexts/AuthContext';
 import MyCampaignsTable from '../../src/Components/MyCampaignsTable';
-
-// TODO: Replace with actual auth hook when implemented
-const useAuth = () => {
-  // Mock auth state - replace with actual auth implementation
-  return {
-    user: {
-      email: "mostafijurruman7@gmail.com", 
-      // ripa@Ruman.com
-      displayName: "MostafijurRuman"
-    },
-    isLoggedIn: true // Change to false to test redirect
-  };
-};
 
 // Fetch campaigns from API and filter by user email
 const fetchUserCampaigns = async (userEmail) => {
@@ -64,17 +52,11 @@ const deleteCampaign = async (campaignId) => {
 };
 
 export default function MyCampaign() {
-  const { user, isLoggedIn } = useAuth();
+  const { user, loading: authLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // TODO: Remove when auth is implemented - this handles redirect to login
-  if (!isLoggedIn) {
-    navigate('/login');
-    return null;
-  }
 
   useEffect(() => {
     const loadUserCampaigns = async () => {
@@ -82,9 +64,12 @@ export default function MyCampaign() {
         setLoading(true);
         setError(null);
         
-        // Fetch campaigns filtered by user email
-        const userCampaigns = await fetchUserCampaigns(user.email);
-        setCampaigns(userCampaigns);
+        // Only fetch if user is available and not in auth loading state
+        if (user?.email && !authLoading) {
+          // Fetch campaigns filtered by user email
+          const userCampaigns = await fetchUserCampaigns(user.email);
+          setCampaigns(userCampaigns);
+        }
       } catch (err) {
         console.error('Failed to fetch user campaigns:', err);
         setError('Failed to load your campaigns. Please try again.');
@@ -93,10 +78,32 @@ export default function MyCampaign() {
       }
     };
 
-    if (user?.email) {
+    if (!authLoading) {
+      if (!user) {
+        // User is not authenticated, redirect to login
+        navigate('/login');
+        return;
+      }
       loadUserCampaigns();
     }
-  }, [user?.email]);
+  }, [user, authLoading, navigate]);
+
+  // Show loading while auth is being determined
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 font-inter">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // User is not authenticated
+  if (!user) {
+    return null; // Component will redirect in useEffect
+  }
 
   // Handle campaign update
   const handleUpdate = (campaignId) => {
@@ -188,7 +195,7 @@ export default function MyCampaign() {
                 You haven't created any campaigns yet.
               </p>
               <button
-                onClick={() => navigate('/addCampaign')}
+                onClick={() => navigate('/add-campaign')}
                 className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 font-poppins"
               >
                 Create Your First Campaign
