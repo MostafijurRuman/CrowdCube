@@ -105,6 +105,7 @@ export default function EditCampaign() {
 
   // Verify user owns this campaign
   if (user && campaign && user.email !== campaign.creatorEmail) {
+    console.log('Access denied: User email does not match campaign creator');
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
