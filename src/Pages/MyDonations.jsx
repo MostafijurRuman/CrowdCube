@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthContext";
 import MyDonationCard from "../Components/MyDonationCard";
 import { FaFilter, FaSort } from "react-icons/fa";
+import { Fade, Zoom } from 'react-awesome-reveal';
 
 export default function MyDonations() {
   const donations = useLoaderData();
@@ -133,11 +134,15 @@ export default function MyDonations() {
               {/* Donations Grid */}
         {totalItems > 0 ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {currentDonations.map(myDonation => (
-                <MyDonationCard key={myDonation._id} myDonation={myDonation} />
-              ))}
-            </div>
+            <Fade direction="up" triggerOnce>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                {currentDonations.map((myDonation, index) => (
+                  <Zoom delay={index * 100} triggerOnce key={myDonation._id}>
+                    <MyDonationCard myDonation={myDonation} />
+                  </Zoom>
+                ))}
+              </div>
+            </Fade>
             
             {/* Pagination Controls */}
             {totalPages > 1 && (

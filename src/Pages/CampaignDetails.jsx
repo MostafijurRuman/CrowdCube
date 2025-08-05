@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 // Function to save donation to backend
 const saveDonation = async (donationData) => {
   try {
-    const response = await fetch(`http://localhost:5000/donations`, {
+    const response = await fetch(`https://crowd-cube-server-zeta.vercel.app/donations`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

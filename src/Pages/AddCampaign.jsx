@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import Swal from 'sweetalert2'
+import { Fade, Slide, Zoom } from 'react-awesome-reveal';
 import { AuthContext } from "../Contexts/AuthContext";
 
 const campaignTypes = [
@@ -35,7 +36,7 @@ const AddCampaign = () => {
     e.preventDefault();
     setLoading(true);
     // Submit logic here
-    fetch('http://localhost:5000/campaigns', {
+    fetch('https://crowd-cube-server-zeta.vercel.app/campaigns', {
       method: 'POST',
       headers: {'content-type': 'application/json'},
       body: JSON.stringify(form)
@@ -68,22 +69,26 @@ const AddCampaign = () => {
 
   return (
     <section className="min-h-screen bg-background py-14 px-2 flex justify-center items-start">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-4xl bg-card-bg rounded-2xl shadow-xl p-8 flex flex-col gap-6 font-inter border border-divider"
-        style={{ fontFamily: "var(--font-inter)" }}
-      >
-        <div className="flex items-center gap-2 mb-4">
-          <FaPlusCircle className="text-2xl text-primary" />
-          <h2
-            className="text-2xl md:text-3xl font-extrabold font-poppins text-primary tracking-tight"
-            style={{ fontFamily: "var(--font-poppins)" }}
-          >
-            Add New Campaign
-          </h2>
-        </div>
+      <Fade direction="up" triggerOnce>
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-4xl bg-card-bg rounded-2xl shadow-xl p-8 flex flex-col gap-6 font-inter border border-divider"
+          style={{ fontFamily: "var(--font-inter)" }}
+        >
+          <Slide direction="down" triggerOnce>
+            <div className="flex items-center gap-2 mb-4">
+              <FaPlusCircle className="text-2xl text-primary" />
+              <h2
+                className="text-2xl md:text-3xl font-extrabold font-poppins text-primary tracking-tight"
+                style={{ fontFamily: "var(--font-poppins)" }}
+              >
+                Add New Campaign
+              </h2>
+            </div>
+          </Slide>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Slide direction="up" cascade triggerOnce>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Image URL - Full Width */}
           <div className="md:col-span-2">
             <label className="block mb-1.5 font-semibold text-text-primary font-poppins">Image/Thumbnail URL</label>
@@ -233,7 +238,9 @@ const AddCampaign = () => {
             </>
           )}
         </button>
-      </form>
+          </Slide>
+        </form>
+      </Fade>
     </section>
   );
 };

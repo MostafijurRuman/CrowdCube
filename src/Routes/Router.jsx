@@ -13,26 +13,28 @@ import Register from "../Pages/Register";
 import CampaignDetails from "../Pages/CampaignDetails";
 import PrivateRoutes from "./PrivateRoutes";
 import EditCampaign from "../Pages/EditCampaign";
+import ErrorPage from "../Pages/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout></MainLayout>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/",
                 element: <Home></Home> ,
-                loader: ()=>fetch('http://localhost:5000/campaigns'),
+                loader: ()=>fetch('https://crowd-cube-server-zeta.vercel.app/campaigns'),
             },
             {
                 path: "/all-campaigns",
                 element: <AllCampaign></AllCampaign> ,
-                loader: ()=>fetch('http://localhost:5000/campaigns'),
+                loader: ()=>fetch('https://crowd-cube-server-zeta.vercel.app/campaigns'),
             },
             {
                 path: "campaigns/:id",
                 element: <CampaignDetails></CampaignDetails> ,
-                loader: ({params})=>fetch(`http://localhost:5000/campaigns/${params.id}`),
+                loader: ({params})=>fetch(`https://crowd-cube-server-zeta.vercel.app/campaigns/${params.id}`),
             },
             {
                 path: "/add-campaign",
@@ -45,12 +47,12 @@ const router = createBrowserRouter([
             {
                 path: "/campaigns/:id/edit",
                 element: <PrivateRoutes><EditCampaign></EditCampaign></PrivateRoutes>,
-                loader: ({params})=>fetch(`http://localhost:5000/campaigns/${params.id}`),
+                loader: ({params})=>fetch(`https://crowd-cube-server-zeta.vercel.app/campaigns/${params.id}`),
             },
             {
                 path: "/my-donations",
                 element:<PrivateRoutes> <MyDonations></MyDonations></PrivateRoutes>,
-                loader: ()=> fetch('http://localhost:5000/donations'),
+                loader: ()=> fetch('https://crowd-cube-server-zeta.vercel.app/donations'),
             },
             {
                 path: "/login",

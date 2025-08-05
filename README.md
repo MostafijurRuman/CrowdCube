@@ -11,7 +11,9 @@
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4.1.11-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Firebase](https://img.shields.io/badge/Firebase-12.0.0-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 
-**[🌐 Live Demo](https://your-live-site-link.com) • [📝 Documentation](#documentation) • [🚀 Getting Started](#getting-started)**
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Site-FF6B6B?style=for-the-badge&logo=firefox&logoColor=white)](https://crowd-cubes.web.app/)
+
+**[🚀 Getting Started](#getting-started) • [📝 Documentation](#documentation) • [�️ Tech Stack](#-tech-stack)**
 
 </div>
 

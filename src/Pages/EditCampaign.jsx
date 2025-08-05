@@ -68,7 +68,7 @@ export default function EditCampaign() {
     console.log('Submitting campaign update:', form);
 
     try {
-      const response = await fetch(`http://localhost:5000/campaigns/${campaign._id}`, {
+      const response = await fetch(`https://crowd-cube-server-zeta.vercel.app/campaigns/${campaign._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)

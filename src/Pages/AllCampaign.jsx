@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import { Fade, Slide } from 'react-awesome-reveal';
 import AllCampaigns from "../Components/AllCampaigns";
 
 export default function AllCampaign() {
@@ -6,7 +7,9 @@ export default function AllCampaign() {
   
   return (
     <div>
-      <AllCampaigns campaigns={campaigns} />
+      <Fade direction="up" triggerOnce>
+        <AllCampaigns campaigns={campaigns} />
+      </Fade>
     </div>
   );
 }

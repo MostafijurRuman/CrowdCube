@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthContext';
 import MyCampaignsTable from '../../src/Components/MyCampaignsTable';
 import Swal from 'sweetalert2';
+import { Fade, Slide } from 'react-awesome-reveal';
 
 // Fetch campaigns from API and filter by user email
 const fetchUserCampaigns = async (userEmail) => {
@@ -10,7 +11,7 @@ const fetchUserCampaigns = async (userEmail) => {
     console.log(`Fetching campaigns for user: ${userEmail}`);
     
     // Fetch all campaigns from API
-    const response = await fetch('http://localhost:5000/campaigns');
+    const response = await fetch('https://crowd-cube-server-zeta.vercel.app/campaigns');
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -34,7 +35,7 @@ const fetchUserCampaigns = async (userEmail) => {
 // Delete campaign API call
 const deleteCampaign = async (campaignId) => {
   try {
-    const response = await fetch(`http://localhost:5000/campaigns/${campaignId}`, {
+    const response = await fetch(`https://crowd-cube-server-zeta.vercel.app/campaigns/${campaignId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -190,39 +191,45 @@ export default function MyCampaign() {
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 font-poppins mb-2">
-            My Campaigns
-          </h1>
-          <p className="text-lg text-gray-600 font-inter">
-            Manage and track your crowdfunding campaigns
-          </p>
-        </div>
+        <Fade direction="up" triggerOnce>
+          <div className="mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 font-poppins mb-2">
+              My Campaigns
+            </h1>
+            <p className="text-lg text-gray-600 font-inter">
+              Manage and track your crowdfunding campaigns
+            </p>
+          </div>
+        </Fade>
 
         {/* Campaigns Table */}
         {campaigns.length > 0 && (
-          <MyCampaignsTable 
-            campaigns={campaigns}
-            onUpdate={handleUpdate}
-            onDelete={handleDelete}
-          />
+          <Slide direction="up" triggerOnce>
+            <MyCampaignsTable 
+              campaigns={campaigns}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
+            />
+          </Slide>
         )}
 
         {/* Empty State */}
         {campaigns.length === 0 && !loading && (
-          <div className="text-center py-12">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-              <p className="text-gray-500 font-inter text-lg mb-4">
-                You haven't created any campaigns yet.
-              </p>
-              <button
-                onClick={() => navigate('/add-campaign')}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 font-poppins"
-              >
-                Create Your First Campaign
-              </button>
+          <Fade direction="up" delay={300} triggerOnce>
+            <div className="text-center py-12">
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+                <p className="text-gray-500 font-inter text-lg mb-4">
+                  You haven't created any campaigns yet.
+                </p>
+                <button
+                  onClick={() => navigate('/add-campaign')}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 font-poppins"
+                >
+                  Create Your First Campaign
+                </button>
+              </div>
             </div>
-          </div>
+          </Fade>
         )}
       </div>
     </div>
