@@ -12,6 +12,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import CampaignDetails from "../Pages/CampaignDetails";
 import PrivateRoutes from "./PrivateRoutes";
+import EditCampaign from "../Pages/EditCampaign";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,11 @@ const router = createBrowserRouter([
             {
                 path: "/my-campaigns",
                 element: <PrivateRoutes><MyCampaign></MyCampaign></PrivateRoutes>,
+            },
+            {
+                path: "/campaigns/:id/edit",
+                element: <PrivateRoutes><EditCampaign></EditCampaign></PrivateRoutes>,
+                loader: ({params})=>fetch(`http://localhost:5000/campaigns/${params.id}`),
             },
             {
                 path: "/my-donations",
