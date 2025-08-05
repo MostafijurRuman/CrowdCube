@@ -33,7 +33,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "campaigns/:id",
-                element: <CampaignDetails></CampaignDetails> ,
+                element: <PrivateRoutes><CampaignDetails></CampaignDetails></PrivateRoutes> ,
                 loader: ({params})=>fetch(`https://crowd-cube-server-zeta.vercel.app/campaigns/${params.id}`),
             },
             {

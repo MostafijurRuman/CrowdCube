@@ -287,25 +287,25 @@ export default function EditCampaign() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 mt-6">
+        <div className="flex flex-col sm:flex-row gap-4 mt-6">
           <button
             type="button"
             onClick={() => navigate('/my-campaigns')}
-            className="btn flex-1 rounded-full text-lg font-bold font-poppins bg-gray-500 text-white hover:bg-gray-600 border-0 shadow-lg transition-all"
+            className="btn flex-1 rounded-full text-base sm:text-lg font-bold font-poppins bg-gray-500 text-white hover:bg-gray-600 border-0 shadow-lg transition-all py-3 sm:py-4"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="btn flex-1 btn-primary rounded-full text-lg font-bold font-poppins bg-primary text-button-text hover:bg-accent-purple border-0 shadow-lg transition-all"
+            className="btn flex-1 btn-primary rounded-full text-base sm:text-lg font-bold font-poppins bg-primary py-3 sm:py-4 text-button-text hover:bg-accent-purple border-0 shadow-lg transition-all"
           >
             {loading ? (
               <span className="loading loading-spinner loading-md"></span>
             ) : (
-              <>
+              <div>
                 <FaEdit className="inline mr-2" /> Update Campaign
-              </>
+              </div>
             )}
           </button>
         </div>

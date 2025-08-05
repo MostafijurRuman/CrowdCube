@@ -48,8 +48,8 @@ const Home = () => {
  const campaigns = useLoaderData();
   return (
     <>
-      {/* Hero Slider */}
-      <div className="w-full font-poppins">
+      {/* Hero Slider - Desktop */}
+      <div className="w-full font-poppins hidden md:block">
         <Carousel
           infiniteLoop
           autoPlay
@@ -106,6 +106,59 @@ const Home = () => {
             </div>
           ))}
         </Carousel>
+      </div>
+
+      {/* Static Hero Section - Mobile */}
+      <div className="w-full font-poppins block md:hidden">
+        <div
+          className="min-h-[480px] flex items-stretch"
+          style={slides[0].gradientStyle}
+        >
+          <div className="flex flex-col items-center justify-center gap-6 p-6 max-w-7xl mx-auto w-full min-h-[480px] text-center">
+            {/* Icon */}
+            <Fade direction="up" triggerOnce>
+              <div className="mb-4">
+                {slides[0].icon}
+              </div>
+            </Fade>
+            
+            {/* Title */}
+            <Fade direction="up" delay={200} triggerOnce>
+              <h1 className="text-3xl font-extrabold mb-4 leading-tight font-poppins text-button-text drop-shadow-xl tracking-tight">
+                {slides[0].title}
+              </h1>
+            </Fade>
+            
+            {/* Description */}
+            <Fade direction="up" delay={400} triggerOnce>
+              <p className="text-lg mb-6 max-w-md leading-relaxed opacity-95 font-inter text-button-text">
+                {slides[0].desc}
+              </p>
+            </Fade>
+            
+            {/* Image */}
+            <Zoom delay={600} triggerOnce>
+              <div className="mb-6">
+                <img
+                  src={slides[0].image}
+                  alt={slides[0].title}
+                  className="max-h-48 object-contain drop-shadow-2xl rounded-xl"
+                  draggable={false}
+                />
+              </div>
+            </Zoom>
+            
+            {/* CTA Button */}
+            <Slide direction="up" delay={800} triggerOnce>
+              <button
+                onClick={() => window.location.href = slides[0].cta.link}
+                className="px-6 py-3 text-base font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 border-white bg-button-text text-primary font-poppins tracking-wide"
+              >
+                {slides[0].cta.label}
+              </button>
+            </Slide>
+          </div>
+        </div>
       </div>
 
       {/* Amazing Stats */}
