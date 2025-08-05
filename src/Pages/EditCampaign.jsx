@@ -64,6 +64,9 @@ export default function EditCampaign() {
     e.preventDefault();
     setLoading(true);
 
+    // Log form data for debugging
+    console.log('Submitting campaign update:', form);
+
     try {
       const response = await fetch(`http://localhost:5000/campaigns/${campaign._id}`, {
         method: 'PUT',
