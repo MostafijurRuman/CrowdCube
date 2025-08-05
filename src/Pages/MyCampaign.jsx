@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthContext';
 import MyCampaignsTable from '../../src/Components/MyCampaignsTable';
+import Swal from 'sweetalert2';
 
 // Fetch campaigns from API and filter by user email
 const fetchUserCampaigns = async (userEmail) => {
@@ -114,7 +115,17 @@ export default function MyCampaign() {
 
   // Handle campaign delete
   const handleDelete = async (campaignId) => {
-    if (!window.confirm('Are you sure you want to delete this campaign? This action cannot be undone.')) {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    });
+
+    if (!result.isConfirmed) {
       return;
     }
 
@@ -127,12 +138,22 @@ export default function MyCampaign() {
       // Remove from local state on successful deletion
       setCampaigns(campaigns.filter(campaign => campaign._id !== campaignId));
       
-      // TODO: Show success message/toast instead of alert
-      alert('Campaign deleted successfully!');
+      // Show success message with SweetAlert2
+      Swal.fire({
+        title: 'Deleted!',
+        text: 'Your campaign has been deleted.',
+        icon: 'success',
+        confirmButtonColor: '#3085d6'
+      });
     } catch (err) {
       console.error('Failed to delete campaign:', err);
-      // TODO: Show error message/toast instead of alert
-      alert('Failed to delete campaign. Please try again.');
+      // Show error message with SweetAlert2
+      Swal.fire({
+        title: 'Error!',
+        text: 'Failed to delete campaign. Please try again.',
+        icon: 'error',
+        confirmButtonColor: '#3085d6'
+      });
     } finally {
       setLoading(false);
     }
